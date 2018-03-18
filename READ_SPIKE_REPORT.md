@@ -2,7 +2,7 @@
 
 ## Spike Description
 
-Explored how the Docker works in general and its integration to the various platforms such as NodeJs also viewed some tutorials about the Blockchains and read a few Research papers about how block chains are used in cryptocurrencies and how bitcoin was flawed. Also studied about the Blockchain platforms Hypeledger and Ethereum.
+Explore the various techniques for the creation of block chains like Hyperledger and Ethereum. To find their pros and cons and eventually to come up with the decision to find which platform is best suited for the project.
 
 
 ## Pros and Cons
