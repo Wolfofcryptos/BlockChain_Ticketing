@@ -1,5 +1,5 @@
 /**
- * Created by Navit on 1/20/16.
+ * Created by Navit.
  */
 module.exports = {
     

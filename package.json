@@ -1,7 +1,7 @@
 {
-  "name": "User_Onboarding",
+  "name": "BlockChain_Ticketing",
   "version": "0.0.1",
-  "description": "User Onboarding Backend API",
+  "description": "BlockChain Ticketing Backend API",
   "main": "server.js",
   "dependencies": {
     "apn": "^2.1.4",

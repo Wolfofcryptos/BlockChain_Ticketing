@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Created by shahab on 11/7/15.
+ * Created by Navit.
  */
 var Config = require('../Config');
 var Jwt = require('jsonwebtoken');
