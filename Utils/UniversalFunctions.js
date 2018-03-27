@@ -134,6 +134,7 @@ var deleteUnnecessaryUserData = function (userObj) {
     delete userObj.password;
     delete userObj.registrationDate;
     delete userObj.OTPCode;
+    delete userObj.accessToken;
     console.log('deleted',userObj)
     return userObj;
 };

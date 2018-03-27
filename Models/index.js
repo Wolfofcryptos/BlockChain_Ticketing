@@ -3,5 +3,6 @@
  */
 'use strict'
 module.exports = {
-    
+    User:require('./user'),
+    ForgetPassword:require('./ForgotPasswordRequest')
 };
