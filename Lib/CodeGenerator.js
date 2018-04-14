@@ -27,6 +27,18 @@ exports.generateUniqueCode = function (noOfDigits,userRole, callback) {
                     }
                 })
             }
+            else if (userRole == UniversalFunctions.CONFIG.APP_CONSTANTS.DATABASE.USER_ROLES.EVENT_MANAGER){
+                Services.EventManagerService.getAllGeneratedCodes(function (err, dataAry) {
+                    if (err){
+                        cb(err);
+                    }else {
+                        if (dataAry && dataAry.length > 0){
+                            excludeArray = dataAry
+                        }
+                        cb();
+                    }
+                })
+            }
             else {
                 cb(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.ERROR.IMP_ERROR)
             }

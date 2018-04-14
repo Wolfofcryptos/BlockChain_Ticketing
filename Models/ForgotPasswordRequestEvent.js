@@ -5,12 +5,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var CONFIG = require('../Config');
 
-var forgetPasswordRequests = new Schema({
-    customerID: {type: Schema.ObjectId, ref: 'user'},
+var forgetPasswordRequestsEvent = new Schema({
+    eventID: {type: Schema.ObjectId, ref: 'eventmanager'},
     userType: {
         type: String,
         enum: [
-            CONFIG.APP_CONSTANTS.DATABASE.USER_ROLES.USER
+            CONFIG.APP_CONSTANTS.DATABASE.USER_ROLES.EVENT_MANAGER
         ],
         required: true
     },
@@ -19,4 +19,4 @@ var forgetPasswordRequests = new Schema({
     changedAt: {type: Date}
 });
 
-module.exports = mongoose.model('forgetPasswordRequests', forgetPasswordRequests);
+module.exports = mongoose.model('forgetPasswordRequestsEvent', forgetPasswordRequestsEvent);

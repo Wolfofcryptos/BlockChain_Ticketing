@@ -4,5 +4,7 @@
 'use strict'
 module.exports = {
     UserService : require('./userService'),
-    ForgetPasswordService:require('./ForgetPasswordService')
+    ForgetPasswordService:require('./ForgetPasswordService'),
+    EventManagerService: require('./eventManagerService'),
+    ForgetPasswordEventService: require('./ForgetPasswordEventService')
 };

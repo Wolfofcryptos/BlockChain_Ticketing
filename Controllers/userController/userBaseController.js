@@ -1,5 +1,5 @@
 /**
- * Created by Navit on 15/11/16.
+ * Created by Navit
  */
 var Service = require('../../Services');
 var UniversalFunctions = require('../../Utils/UniversalFunctions');

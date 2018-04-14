@@ -4,5 +4,7 @@
 'use strict'
 module.exports = {
     User:require('./user'),
-    ForgetPassword:require('./ForgotPasswordRequest')
+    ForgetPassword:require('./ForgotPasswordRequest'),
+    EventManager:require('./EventManager'),
+    ForgetPasswordEvent:require('./ForgotPasswordRequestEvent')
 };

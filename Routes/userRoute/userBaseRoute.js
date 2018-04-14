@@ -1,5 +1,5 @@
 /**
- * Created by Navit on 15/11/16.
+ * Created by Navit
  */
 var UniversalFunctions = require('../../Utils/UniversalFunctions');
 var Controller = require('../../Controllers');
@@ -32,7 +32,7 @@ var userRegister = {
                 first_name: Joi.string().regex(/^[a-zA-Z ]+$/).trim().min(2).required(),
                 last_name: Joi.string().regex(/^[a-zA-Z ]+$/).trim().min(2).required(),
                 emailId: Joi.string().required(),
-                password: Joi.string().optional().min(5).allow(''),
+                password: Joi.string().required().min(5).trim(),
             },
             failAction: UniversalFunctions.failActionFunction
         },
@@ -97,7 +97,7 @@ var login = {
         }
     },
     config: {
-        description: 'Login Via Phone Number & Password For User',
+        description: 'Login Via Password For User',
         tags: ['api', 'user'],
         validate: {
             payload: {
@@ -134,8 +134,8 @@ var resendOTP =
             headers: UniversalFunctions.authorizationHeaderObj,
             failAction: UniversalFunctions.failActionFunction
         },
-        description: 'Resend OTP for Customer',
-        tags: ['api', 'customer'],
+        description: 'Resend OTP for User',
+        tags: ['api', 'user'],
         plugins: {
             'hapi-swagger': {
                 responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
@@ -289,7 +289,7 @@ var changePassword =
     },
     config: {
         description: 'change Password',
-        tags: ['api', 'customer'],
+        tags: ['api', 'user'],
         auth: 'UserAuth',
         validate: {
             headers: UniversalFunctions.authorizationHeaderObj,

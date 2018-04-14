@@ -4,5 +4,6 @@
 'use strict'
 
 var UserBaseRoute = require('./userRoute/userBaseRoute');
-var APIs = [].concat(UserBaseRoute);
+var EventManagerBaseRoute = require('./eventManagerRoute/eventManagerBaseRoute');
+var APIs = [].concat(UserBaseRoute,EventManagerBaseRoute);
 module.exports = APIs;

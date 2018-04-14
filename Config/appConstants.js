@@ -41,7 +41,9 @@ var DATABASE = {
         IOS:"IOS"
     },
     USER_ROLES:{
-        USER:"USER"
+        USER:"USER",
+        EVENT_MANAGER:"EVENT_MANAGER",
+        ADMIN:"ADMIN"
     }
 };
 
@@ -56,6 +58,11 @@ var STATUS_MSG = {
             statusCode:409,
             customMessage : 'You are already registered with us',
             type : 'USER_ALREADY_REGISTERED'
+        },
+        EVENT_MANAGER_ALREADY_REGISTERED:{
+            statusCode:409,
+            customMessage : 'You are already registered with us',
+            type : 'EVENT_MANAGER_ALREADY_REGISTERED'
         },
         PASSWORD_REQUIRED: {
             statusCode:400,
