@@ -154,6 +154,11 @@ var STATUS_MSG = {
             customMessage : 'Your email verification is incomplete.',
             type : ' EMAIL_VERIFICATION'
         },
+        MANAGER_NOT_APPROVED: {
+            statusCode:400,
+            customMessage : 'Your are not yet approved by the admin.',
+            type : ' MANAGER_NOT_APPROVED'
+        },
         INCORRECT_ID: {
             statusCode:401,
             customMessage : 'Incorrect Email ID',

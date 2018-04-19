@@ -13,7 +13,7 @@ var user = new Schema({
     password: {type: String},
     code:{type: String, trim: true},
     OTPCode: {type: String, trim: true},
-    emailVerified: {type: Boolean, default: false},
+    emailVerified: {type: Boolean, default: true},
     registrationDate: {type: Date, default: Date.now},
     codeUpdatedAt: {type: Date, default: Date.now, required: true}
 });

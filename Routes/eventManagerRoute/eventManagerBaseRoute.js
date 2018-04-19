@@ -208,6 +208,180 @@ var accessTokenLogin =
 
 }
 
+var logoutCustomer = {
+    method: 'PUT',
+    path: '/api/eventmanager/logout',
+    config: {
+        description: 'Logout Event Manager',
+        auth: 'UserAuth',
+        tags: ['api', 'eventmanager'],
+        handler: function (request, reply) {
+            var userData = request.auth && request.auth.credentials && request.auth.credentials.userData || null;
+                 Controller.EventManagerBaseController.logoutManager(userData, function (err, data) {
+                    if (err) {
+                        reply(UniversalFunctions.sendError(err));
+                    } else {
+                        reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.LOGOUT));
+                    }
+                });
+
+        },
+        validate: {
+            headers: UniversalFunctions.authorizationHeaderObj,
+            failAction: UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+
+    }
+};
+
+var getProfile = {
+    method: 'GET',
+    path: '/api/eventmanager/getProfile',
+    config: {
+        description: 'get profile of event manager',
+        auth: 'UserAuth',
+        tags: ['api', 'eventmanager'],
+        handler: function (request, reply) {
+            var userData = request.auth && request.auth.credentials && request.auth.credentials.userData || null;
+            if (userData && userData.id) {
+                Controller.EventManagerBaseController.getProfile(userData, function (error, success) {
+                    if (error) {
+                        reply(UniversalFunctions.sendError(error));
+                    } else {
+                        reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT, success));
+                    }
+                });
+            } else {
+                reply(UniversalFunctions.sendError(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.ERROR.INVALID_TOKEN));
+            }
+        },
+        validate: {
+            headers: UniversalFunctions.authorizationHeaderObj,
+            failAction: UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+    }
+};
+
+var changePassword =
+{
+    method: 'PUT',
+    path: '/api/eventmanager/changePassword',
+    handler: function (request, reply) {
+        var userData = request.auth && request.auth.credentials && request.auth.credentials.userData || null;
+        Controller.EventManagerBaseController.changePassword(userData,request.payload, function (err, user) {
+            if (!err) {
+                return reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.PASSWORD_RESET, user));
+            }
+            else {
+                return reply(UniversalFunctions.sendError(err));
+            }
+        });
+    },
+    config: {
+        description: 'change Password',
+        tags: ['api', 'eventmanager'],
+        auth: 'UserAuth',
+        validate: {
+            headers: UniversalFunctions.authorizationHeaderObj,
+            payload: {
+                oldPassword: Joi.string().required().min(4),
+                newPassword: Joi.string().required().min(4)
+            },
+            failAction: UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+    }
+}
+
+var forgotPassword = {
+    method: 'POST',
+    path: '/api/eventmanager/forgotPassword',
+    config: {
+        description: 'forgot password',
+        tags: ['api', 'eventmanager'],
+        handler: function (request, reply) {
+            var payloadData = request.payload;
+            if(!UniversalFunctions.verifyEmailFormat(payloadData.emailId)){
+                reply(UniversalFunctions.sendError(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.ERROR.INVALID_EMAIL_FORMAT));
+            }
+            else{
+                Controller.EventManagerBaseController.forgetPassword(request.payload, function (error, success) {
+                    if (error) {
+                        reply(UniversalFunctions.sendError(error));
+                    } else {
+                        reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.VERIFY_SENT, success));
+                    }
+                });
+            }
+        },
+        validate: {
+            payload: {
+                emailId: Joi.string().required()
+            },
+            failAction:  UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages:  UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+
+    }
+};
+
+var resetPassword = {
+
+    method: 'POST',
+    path: '/api/eventmanager/resetPassword',
+    config: {
+        description: 'reset password',
+        tags: ['api', 'eventmanager'],
+        handler: function (request, reply) {
+            var payloadData = request.payload;
+            if(!UniversalFunctions.verifyEmailFormat(payloadData.emailId)){
+                reply(UniversalFunctions.sendError(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.ERROR.INVALID_EMAIL_FORMAT));
+            }
+            else{
+                Controller.EventManagerBaseController.resetPassword(request.payload, function (error, success) {
+                    if (error) {
+                        reply(UniversalFunctions.sendError(error));
+                    } else {
+                        reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.PASSWORD_RESET, success));
+                    }
+                });
+            }
+        },
+        validate: {
+            payload: {
+                password: Joi.string().min(6).required().trim(),
+                emailId: Joi.string().required(),
+                OTPCode : Joi.string().required()
+            },
+            failAction: UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+
+    }
+};
+
 var EventManagerBaseRoute =
     [
         eventManagerRegister,
@@ -215,6 +389,11 @@ var EventManagerBaseRoute =
         login,
         resendOTP,
         getOTP,
-        accessTokenLogin 
+        accessTokenLogin,
+        logoutCustomer,
+        getProfile,
+        changePassword,
+        forgotPassword,
+        resetPassword
     ]
 module.exports = EventManagerBaseRoute;
