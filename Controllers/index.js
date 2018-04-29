@@ -4,5 +4,6 @@
 'use strict'
 module.exports = {
     UserBaseController:require('./userController/userBaseController'),
-    EventManagerBaseController:require('./eventManagerController/eventManagerBaseController')
+    EventManagerBaseController:require('./eventManagerController/eventManagerBaseController'),
+    AdminBaseController:require('./adminController/adminBaseController')
 };

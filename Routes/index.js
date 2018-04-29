@@ -5,5 +5,6 @@
 
 var UserBaseRoute = require('./userRoute/userBaseRoute');
 var EventManagerBaseRoute = require('./eventManagerRoute/eventManagerBaseRoute');
-var APIs = [].concat(UserBaseRoute,EventManagerBaseRoute);
+var AdminBaseRoute = require('./adminRoute/adminBaseRoute');
+var APIs = [].concat(UserBaseRoute,EventManagerBaseRoute,AdminBaseRoute);
 module.exports = APIs;

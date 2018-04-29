@@ -6,5 +6,7 @@ module.exports = {
     User:require('./user'),
     ForgetPassword:require('./ForgotPasswordRequest'),
     EventManager:require('./EventManager'),
-    ForgetPasswordEvent:require('./ForgotPasswordRequestEvent')
+    ForgetPasswordEvent:require('./ForgotPasswordRequestEvent'),
+    Admin:require('./admin'),
+    ForgetPasswordAdmin:require('./ForgotPasswordRequestAdmin'),
 };

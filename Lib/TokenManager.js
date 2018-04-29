@@ -48,6 +48,21 @@ var getTokenFromDB = function (userId, userType,token, callback) {
 
                     });
                     break;
+                    case Config.APP_CONSTANTS.DATABASE.USER_ROLES.ADMIN :
+                    Service.AdminService.getAdmin(criteria,{},{lean:true}, function (err, dataAry) {
+                        if (err){
+                            cb(err)
+                        }else {
+                            if (dataAry && dataAry.length > 0){
+                                userData = dataAry[0];
+                                cb();
+                            }else {
+                                cb(Config.APP_CONSTANTS.STATUS_MSG.ERROR.INVALID_TOKEN)
+                            }
+                        }
+
+                    });
+                    break;
                 default :
                     cb(Config.APP_CONSTANTS.STATUS_MSG.ERROR.IMP_ERROR);
 
@@ -93,6 +108,19 @@ var setTokenInDB = function (userId,userType, tokenToSave, callback) {
                     break;
                     case Config.APP_CONSTANTS.DATABASE.USER_ROLES.EVENT_MANAGER:
                     Service.EventManagerService.updateEventManager(criteria,setQuery,{new:true}, function (err, dataAry) {
+                        if (err){
+                            cb(err)
+                        }else {
+                            if (dataAry && dataAry._id){
+                                cb();
+                            }else {
+                                cb(Config.APP_CONSTANTS.STATUS_MSG.ERROR.IMP_ERROR)
+                            }
+                        }
+                    });
+                    break;
+                    case Config.APP_CONSTANTS.DATABASE.USER_ROLES.ADMIN:
+                    Service.AdminService.updateAdmin(criteria,setQuery,{new:true}, function (err, dataAry) {
                         if (err){
                             cb(err)
                         }else {

@@ -6,5 +6,7 @@ module.exports = {
     UserService : require('./userService'),
     ForgetPasswordService:require('./ForgetPasswordService'),
     EventManagerService: require('./eventManagerService'),
-    ForgetPasswordEventService: require('./ForgetPasswordEventService')
+    ForgetPasswordEventService: require('./ForgetPasswordEventService'),
+    AdminService : require('./adminService'),
+    ForgetPasswordAdminService: require('./ForgetPasswordRequestAdminService'),
 };
