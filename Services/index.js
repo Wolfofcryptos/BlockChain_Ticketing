@@ -9,4 +9,6 @@ module.exports = {
     ForgetPasswordEventService: require('./ForgetPasswordEventService'),
     AdminService : require('./adminService'),
     ForgetPasswordAdminService: require('./ForgetPasswordRequestAdminService'),
+    HyperledgerService: require('./hyperledgerService'),
+    EventService: require('./eventService')
 };

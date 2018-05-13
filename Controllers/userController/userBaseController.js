@@ -118,6 +118,20 @@ var createUser = function (payloadData,callback) {
                 cb(ERROR.IMP_ERROR)
             }
         },
+        function(cb){
+            var dataToSend = {
+                _id:  (customerData._id).toString(),
+                name: customerData.first_name + " " + customerData.last_name,
+                emailId: customerData.emailId
+            }
+            Service.HyperledgerService.createAtendee(dataToSend,function(err,data){
+                if(err) cb(err);
+                else{
+                    console.log(">>>>>>Hyper",data);
+                    cb();
+                }
+            })
+        }
     ], function (err, data) {
         if (err) {
             callback(err);
@@ -183,7 +197,7 @@ var verifyOTP = function (userData,payloadData,callback) {
                     }
                 }
             });
-        }
+        },
     ], function (err, result) {
         if (err) {
             callback(err)

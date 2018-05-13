@@ -9,4 +9,5 @@ module.exports = {
     ForgetPasswordEvent:require('./ForgotPasswordRequestEvent'),
     Admin:require('./admin'),
     ForgetPasswordAdmin:require('./ForgotPasswordRequestAdmin'),
+    Event:require('./event')
 };

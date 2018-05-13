@@ -44,6 +44,10 @@ var DATABASE = {
         USER:"USER",
         EVENT_MANAGER:"EVENT_MANAGER",
         ADMIN:"ADMIN"
+    },
+    EVENT_STATUS:{
+        FULL:"FULL",
+        AVAILABLE:"AVAILABLE"
     }
 };
 
@@ -178,6 +182,16 @@ var STATUS_MSG = {
             statusCode:400,
             customMessage : 'Inavlid email format',
             type : 'INVALID_EMAIL_FORMAT'
+        },
+        EVENT_NO_FOUND : {
+            statusCode:400,
+            customMessage : 'Event not found',
+            type : 'EVENT_NO_FOUND'
+        },
+        EVENT_FULL : {
+            statusCode:400,
+            customMessage : 'All the tickets for this event has been sold',
+            type : 'EVENT_FULL'
         }
     },
     SUCCESS: {

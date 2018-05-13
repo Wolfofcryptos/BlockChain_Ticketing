@@ -80,17 +80,6 @@ var createAdmin = function (payloadData,callback) {
                 }
             })
         },
-        // function (cb) {
-        //     //Send Mail to User
-        //     if (customerData) {
-        //         NotificationManager.sendSMSToUser(uniqueCode, dataToSave.countryCode, dataToSave.mobileNo, function (err, data) {
-        //             cb();
-        //         })
-        //     } else {
-        //         cb(ERROR.IMP_ERROR)
-        //     }
-        //
-        // },
         function (cb) {
             //Set Access Token
             if (customerData) {
@@ -110,6 +99,20 @@ var createAdmin = function (payloadData,callback) {
                 cb(ERROR.IMP_ERROR)
             }
         },
+        function(cb){
+            var dataToSend = {
+                _id: (customerData._id).toString(),
+                name: customerData.first_name + " " + customerData.last_name,
+                emailId: customerData.emailId
+            }
+            Service.HyperledgerService.createAdmin(dataToSend,function(err,data){
+                if(err) cb(err);
+                else{
+                    console.log(">>>>>>Hyper",data);
+                    cb();
+                }
+            })
+        }
     ], function (err, data) {
         if (err) {
             callback(err);

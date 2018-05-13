@@ -118,6 +118,20 @@ var createEventManager = function (payloadData,callback) {
                 cb(ERROR.IMP_ERROR)
             }
         },
+        function(cb){
+            var dataToSend = {
+                _id: (eventManagerData._id).toString(),
+                name: eventManagerData.first_name + " " + eventManagerData.last_name,
+                emailId: eventManagerData.emailId
+            }
+            Service.HyperledgerService.createEventManager(dataToSend,function(err,data){
+                if(err) cb(err);
+                else{
+                    console.log(">>>>>>Hyper",data);
+                    cb();
+                }
+            })
+        }
     ], function (err, data) {
         if (err) {
             callback(err);
