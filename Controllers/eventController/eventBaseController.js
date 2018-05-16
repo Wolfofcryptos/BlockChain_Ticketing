@@ -247,6 +247,9 @@ var getAvailableTickets = function(userData,payloadData,callback){
 }
 
 var getUserEvent = function (userData,callback) {
+
+    console.log("????????",userData);
+
     var eventData;
     async.series([
         function (cb) {
