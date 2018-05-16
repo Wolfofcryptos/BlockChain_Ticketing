@@ -109,11 +109,8 @@ var getEvent = function (userData,callback) {
                 if (err) {
                     cb(err);
                 } else {
-                    if(data.length == 0) cb(ERROR.INCORRECT_ACCESSTOKEN)
-                    else {
-                        eventData = data;
+                    eventData = data;
                         cb()
-                    }
                 }
             });
         }
@@ -254,12 +251,16 @@ var getUserEvent = function (userData,callback) {
     async.series([
         function (cb) {
             var criteria = {
-                _id: userData._id
+                _id: userData.id
             }
             Service.UserService.getUser(criteria, {}, {}, function (err, data) {
+                console.log(data);
                 if (err) cb(err)
                 else {
-                    if (data.length == 0) cb(ERROR.INCORRECT_ACCESSTOKEN)
+                    if (data.length == 0){
+
+                        cb(ERROR.INCORRECT_ACCESSTOKEN)
+                    } 
                     else {
                         cb()
                     }
@@ -279,11 +280,8 @@ var getUserEvent = function (userData,callback) {
                 if (err) {
                     cb(err);
                 } else {
-                    if(data.length == 0) cb(ERROR.INCORRECT_ACCESSTOKEN)
-                    else {
-                        eventData = data;
-                        cb()
-                    }
+                    eventData = data;
+                    cb();
                 }
             });
         }
