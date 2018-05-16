@@ -159,6 +159,7 @@ var getUserEvent = {
         tags: ['api', 'user'],
         handler: function (request, reply) {
             var userData = request.auth && request.auth.credentials && request.auth.credentials.userData || null;
+            console.log(">>>>>>",userData);
             if (userData && userData.id) {
                 Controller.EventBaseController.getUserEvent(userData, function (error, success) {
                     if (error) {
