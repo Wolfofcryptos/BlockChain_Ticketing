@@ -251,7 +251,7 @@ var getUserEvent = function (userData,callback) {
     async.series([
         function (cb) {
             var criteria = {
-                _id: userData.id
+                _id: userData._id
             }
             Service.UserService.getUser(criteria, {}, {}, function (err, data) {
                 if (err) cb(err)
