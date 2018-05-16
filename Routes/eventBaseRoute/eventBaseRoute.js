@@ -250,6 +250,32 @@ var userBoughtTickets = {
     }
 }
 
+var getAllEvent = {
+    method: 'GET',
+    path: '/api/user/getAllEvent',
+    config: {
+        description: 'get all event for user',
+        tags: ['api', 'user'],
+        handler: function (request, reply) {
+            Controller.EventBaseController.getAllEvent(function (error, success) {
+                if (error) {
+                    reply(UniversalFunctions.sendError(error));
+                } else {
+                    reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT, success));
+                }
+            });
+        },
+        validate: {
+            failAction: UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+    }
+};
+
 
 var EventManagerEventRoute =
     [
@@ -259,6 +285,7 @@ var EventManagerEventRoute =
         getAvailableTickets,
         getUserEvent,
         buyTicket,
-        userBoughtTickets
+        userBoughtTickets,
+        getAllEvent
     ]
 module.exports = EventManagerEventRoute;

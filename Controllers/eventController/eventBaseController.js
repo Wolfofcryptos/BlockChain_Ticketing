@@ -449,6 +449,33 @@ var userBoughtTickets = function(userData,callback){
     })
 }
 
+var getAllEvent = function (callback) {
+    async.series([
+        
+        function(cb){
+            var query = {
+                
+            };
+            var projection = {
+                __v:0,
+            };
+            var options = {lean: true};
+            Service.EventService.getEvent(query, projection, options, function (err, data) {
+                if (err) {
+                    cb(err);
+                } else {
+                    eventData = data;
+                    cb();
+                }
+            });
+        }
+
+    ], function (err, result) {
+        if(err) callback(err)
+        else callback(null,{eventData:eventData})
+    })
+}
+
 module.exports = {
     createEvent:createEvent,
     getEvent:getEvent,
@@ -456,5 +483,6 @@ module.exports = {
     getUserEvent:getUserEvent,
     buyTicket:buyTicket,
     getAvailableTickets:getAvailableTickets,
-    userBoughtTickets:userBoughtTickets
+    userBoughtTickets:userBoughtTickets,
+    getAllEvent:getAllEvent
 };
