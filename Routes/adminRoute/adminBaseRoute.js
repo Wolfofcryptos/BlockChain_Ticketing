@@ -180,7 +180,7 @@ var getProfile = {
 
 var changePassword =
 {
-    method: 'PUT',
+    method: 'POST',
     path: '/api/admin/changePassword',
     handler: function (request, reply) {
         var userData = request.auth && request.auth.credentials && request.auth.credentials.userData || null;
