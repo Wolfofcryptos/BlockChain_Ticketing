@@ -175,7 +175,7 @@ var getBoughtTickets = function(userData,payloadData,callback){
                             return function (embeddedCB) {
                                 //TODO
                                 var ownerparts = (ticketData[key].owner).split("#");
-                                var ownerId = eventparts[1];
+                                var ownerId = ownerparts[1];
                                 console.log(">>>>>",ownerId);
                                 Service.UserService.getUser({_id:ownerId},{},{},function(err,data){
                                     ticketData[key].userName = data[0].first_name+" "+data[0].last_name;
