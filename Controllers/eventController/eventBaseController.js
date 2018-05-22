@@ -434,8 +434,30 @@ var userBoughtTickets = function(userData,callback){
         },
         function(cb){
             if(ticketData.length>0){
-                finalData = ticketData;
-                cb()
+                console.log('!!!!!!!!!!!!!!!', ticketData);
+                var taskInParallel = [];
+                for (var key in ticketData) {
+                    (function (key) {
+                        taskInParallel.push((function (key) {
+                            return function (embeddedCB) {
+                                //TODO
+                                var eventparts = (ticketData[key].event).split("#");
+                                var eventId = eventparts[1];
+                                console.log(">>>>>",eventId);
+                                Service.EventService.getEvent({_id:eventId},{},{},function(err,data){
+                                    var eventName = data[0].event_name;
+                                    ticketData[key].eventName = eventName;
+                                    embeddedCB();
+                                })
+                            }
+                        })(key))
+                    }(key));
+                }
+                async.parallel(taskInParallel, function (err, result) {
+                    finalData = ticketData;
+                    cb();
+                });
+                
             }
             else{
                 finalData = ticketData;
