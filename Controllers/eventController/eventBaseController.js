@@ -447,6 +447,8 @@ var userBoughtTickets = function(userData,callback){
                                 Service.EventService.getEvent({_id:eventId},{},{},function(err,data){
                                     var eventName = data[0].event_name;
                                     ticketData[key].eventName = eventName;
+                                    ticketData[key].eventDescription = data[0].description;
+                                    ticketData[key].eventVenue = data[0].venue;
                                     embeddedCB();
                                 })
                             }
