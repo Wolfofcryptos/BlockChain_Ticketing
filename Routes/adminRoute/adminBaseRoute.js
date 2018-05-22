@@ -288,6 +288,72 @@ var resetPassword = {
     }
 };
 
+var getAllUsers = {
+    method: 'GET',
+    path: '/api/admin/getAllUsers',
+    config: {
+        description: 'get all users for admin',
+        auth: 'UserAuth',
+        tags: ['api', 'admin'],
+        handler: function (request, reply) {
+            var userData = request.auth && request.auth.credentials && request.auth.credentials.userData || null;
+            if (userData && userData.id) {
+                Controller.AdminBaseController.getAllUsers(userData, function (error, success) {
+                    if (error) {
+                        reply(UniversalFunctions.sendError(error));
+                    } else {
+                        reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT, success));
+                    }
+                });
+            } else {
+                reply(UniversalFunctions.sendError(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.ERROR.INVALID_TOKEN));
+            }
+        },
+        validate: {
+            headers: UniversalFunctions.authorizationHeaderObj,
+            failAction: UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+    }
+};
+
+var getEventManagers = {
+    method: 'GET',
+    path: '/api/admin/getEventManagers',
+    config: {
+        description: 'get all event managers for admin',
+        auth: 'UserAuth',
+        tags: ['api', 'admin'],
+        handler: function (request, reply) {
+            var userData = request.auth && request.auth.credentials && request.auth.credentials.userData || null;
+            if (userData && userData.id) {
+                Controller.AdminBaseController.getEventManagers(userData, function (error, success) {
+                    if (error) {
+                        reply(UniversalFunctions.sendError(error));
+                    } else {
+                        reply(UniversalFunctions.sendSuccess(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.SUCCESS.DEFAULT, success));
+                    }
+                });
+            } else {
+                reply(UniversalFunctions.sendError(UniversalFunctions.CONFIG.APP_CONSTANTS.STATUS_MSG.ERROR.INVALID_TOKEN));
+            }
+        },
+        validate: {
+            headers: UniversalFunctions.authorizationHeaderObj,
+            failAction: UniversalFunctions.failActionFunction
+        },
+        plugins: {
+            'hapi-swagger': {
+                responseMessages: UniversalFunctions.CONFIG.APP_CONSTANTS.swaggerDefaultResponseMessages
+            }
+        }
+    }
+};
+
 
 var AdminBaseRoute =
     [
@@ -298,6 +364,8 @@ var AdminBaseRoute =
         getProfile,
         changePassword,
         forgotPassword,
-        resetPassword
+        resetPassword,
+        getAllUsers,
+        getEventManagers
     ]
 module.exports = AdminBaseRoute;

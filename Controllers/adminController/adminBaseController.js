@@ -639,6 +639,92 @@ var resetPassword = function (payloadData,callbackRoute) {
     })
 }
 
+var getAllUsers = function (userData,callback) {
+    var customerData;
+    async.series([
+        function(cb){
+            var query = {
+                _id: userData.id
+            };
+            var projection = {
+                __v:0,
+                password:0,
+                accessToken:0,
+                codeUpdatedAt:0,
+                code:0,
+                OTPCode:0
+            };
+            var options = {lean: true};
+            Service.AdminService.getAdmin(query, projection, options, function (err, data) {
+                if (err) {
+                    cb(err);
+                } else {
+                    if(data.length == 0) cb(ERROR.INCORRECT_ACCESSTOKEN)
+                    else {
+                        cb()
+                    }
+                }
+            });
+        },
+        function(cb){
+            Service.UserService.getUser({},{},{},function(err,data){
+                if(err) cb(err)
+                else{
+                    customerData = data;
+                    cb()
+                }
+            })
+        }
+
+    ], function (err, result) {
+        if(err) callback(err)
+        else callback(null,{customerData:customerData})
+    })
+}
+
+var getEventManagers = function (userData,callback) {
+    var customerData;
+    async.series([
+        function(cb){
+            var query = {
+                _id: userData.id
+            };
+            var projection = {
+                __v:0,
+                password:0,
+                accessToken:0,
+                codeUpdatedAt:0,
+                code:0,
+                OTPCode:0
+            };
+            var options = {lean: true};
+            Service.AdminService.getAdmin(query, projection, options, function (err, data) {
+                if (err) {
+                    cb(err);
+                } else {
+                    if(data.length == 0) cb(ERROR.INCORRECT_ACCESSTOKEN)
+                    else {
+                        cb()
+                    }
+                }
+            });
+        },
+        function(cb){
+            Service.EventManagerService.getEventManager({},{},{},function(err,data){
+                if(err) cb(err)
+                else{
+                    customerData = data;
+                    cb()
+                }
+            })
+        }
+
+    ], function (err, result) {
+        if(err) callback(err)
+        else callback(null,{eventManagerData:customerData})
+    })
+}
+
 module.exports = {
     createAdmin:createAdmin,
     loginUser:loginUser,
@@ -647,5 +733,7 @@ module.exports = {
     getProfile:getProfile,
     changePassword:changePassword,
     forgetPassword:forgetPassword,
-    resetPassword:resetPassword
+    resetPassword:resetPassword,
+    getEventManagers:getEventManagers,
+    getAllUsers:getAllUsers
 };
