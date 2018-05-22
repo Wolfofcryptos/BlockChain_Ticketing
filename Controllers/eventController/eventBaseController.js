@@ -167,8 +167,29 @@ var getBoughtTickets = function(userData,payloadData,callback){
         },
         function(cb){
             if(ticketData.length>0){
-                finalData = ticketData;
-                cb()
+                console.log('!!!!!!!!!!!!!!!', ticketData);
+                var taskInParallel = [];
+                for (var key in ticketData) {
+                    (function (key) {
+                        taskInParallel.push((function (key) {
+                            return function (embeddedCB) {
+                                //TODO
+                                var ownerparts = (ticketData[key].owner).split("#");
+                                var ownerId = eventparts[1];
+                                console.log(">>>>>",ownerId);
+                                Service.UserService.getUser({_id:ownerId},{},{},function(err,data){
+                                    ticketData[key].userName = data[0].first_name+" "+data[0].last_name;
+                                    ticketData[key].userEmail = data[0].emailId;
+                                    embeddedCB();
+                                })
+                            }
+                        })(key))
+                    }(key));
+                }
+                async.parallel(taskInParallel, function (err, result) {
+                    finalData = ticketData;
+                    cb();
+                });
             }
             else{
                 finalData = ticketData;
@@ -228,29 +249,8 @@ var getAvailableTickets = function(userData,payloadData,callback){
         },
         function(cb){
             if(ticketData.length>0){
-                console.log('!!!!!!!!!!!!!!!', ticketData);
-                var taskInParallel = [];
-                for (var key in ticketData) {
-                    (function (key) {
-                        taskInParallel.push((function (key) {
-                            return function (embeddedCB) {
-                                //TODO
-                                var ownerparts = (ticketData[key].owner).split("#");
-                                var ownerId = eventparts[1];
-                                console.log(">>>>>",ownerId);
-                                Service.UserService.getUser({_id:ownerId},{},{},function(err,data){
-                                    ticketData[key].userName = data[0].first_name+" "+data[0].last_name;
-                                    ticketData[key].userEmail = data[0].emailId;
-                                    embeddedCB();
-                                })
-                            }
-                        })(key))
-                    }(key));
-                }
-                async.parallel(taskInParallel, function (err, result) {
-                    finalData = ticketData;
-                    cb();
-                });
+                finalData = ticketData;
+                cb()
             }
             else{
                 finalData = ticketData;
