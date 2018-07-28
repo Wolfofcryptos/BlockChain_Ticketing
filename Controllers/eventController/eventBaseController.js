@@ -174,6 +174,37 @@ var getBoughtTickets = function(userData,payloadData,callback){
                         taskInParallel.push((function (key) {
                             return function (embeddedCB) {
                                 //TODO
+                                
+                                Service.EventService.getEvent({_id:payloadData.eventId},{},{},function(err,data){
+                                    var eventName = data[0].event_name;
+                                    ticketData[key].eventName = eventName;
+                                    ticketData[key].eventDescription = data[0].description;
+                                    ticketData[key].eventVenue = data[0].venue;
+                                    embeddedCB();
+                                })
+                            }
+                        })(key))
+                    }(key));
+                }
+                async.parallel(taskInParallel, function (err, result) {
+                    ticketData = ticketData;
+                    cb();
+                });
+            }
+            else{
+                ticketData = ticketData;
+                cb()
+            }
+        },
+        function(cb){
+            if(ticketData.length>0){
+                console.log('!!!!!!!!!!!!!!!', ticketData);
+                var taskInParallel = [];
+                for (var key in ticketData) {
+                    (function (key) {
+                        taskInParallel.push((function (key) {
+                            return function (embeddedCB) {
+                                //TODO
                                 var ownerparts = (ticketData[key].owner).split("#");
                                 var ownerId = ownerparts[1];
                                 console.log(">>>>>",ownerId);
