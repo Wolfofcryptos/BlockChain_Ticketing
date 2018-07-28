@@ -211,6 +211,7 @@ var getBoughtTickets = function(userData,payloadData,callback){
                                 Service.UserService.getUser({_id:ownerId},{},{},function(err,data){
                                     ticketData[key].userName = data[0].first_name+" "+data[0].last_name;
                                     ticketData[key].userEmail = data[0].emailId;
+                                    ticketData[key].owner = data[0].first_name+" "+data[0].last_name;
                                     embeddedCB();
                                 })
                             }
@@ -455,6 +456,7 @@ var buyTicket = function(userData,payloadData,callback){
 var userBoughtTickets = function(userData,callback){
     var ticketData;
     var finalData;
+    var customerData;
     async.series([
         function (cb) {
             var criteria = {
@@ -465,6 +467,7 @@ var userBoughtTickets = function(userData,callback){
                 else {
                     if (data.length == 0) cb(ERROR.INCORRECT_ACCESSTOKEN)
                     else {
+                        customerData = data && data[0] || null;
                         cb()
                     }
                 }
@@ -501,6 +504,7 @@ var userBoughtTickets = function(userData,callback){
                                     ticketData[key].eventName = eventName;
                                     ticketData[key].eventDescription = data[0].description;
                                     ticketData[key].eventVenue = data[0].venue;
+                                    ticketData[key].owner = customerData.first_name+" "+customerData.last_name;
                                     embeddedCB();
                                 })
                             }
