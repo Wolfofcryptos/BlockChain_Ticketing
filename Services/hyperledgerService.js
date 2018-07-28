@@ -14,7 +14,7 @@ var createAdmin = function(details,callback){
         "email": details.emailId
         }
         request({
-            url: 'http://13.211.104.116:3000/api/Admin', //URL to hit
+            url: 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.Admin', //URL to hit
             method: 'POST',
             form: data_to_send //Set the body as a string
         }, function(error, response, body){
@@ -37,7 +37,7 @@ var createEventManager = function(details,callback){
         "email": details.emailId
         }
         request({
-            url: 'http://13.211.104.116:3000/api/EventManager', //URL to hit
+            url: 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.EventManager', //URL to hit
             method: 'POST',
             form: data_to_send //Set the body as a string
         }, function(error, response, body){
@@ -59,7 +59,7 @@ var createAtendee = function(details,callback){
         "email": details.emailId
         }
         request({
-            url: 'http://13.211.104.116:3000/api/Attendee', //URL to hit
+            url: 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.Attendee', //URL to hit
             method: 'POST',
             form: data_to_send //Set the body as a string
         }, function(error, response, body){
@@ -86,7 +86,7 @@ var createEvent = function(details,callback){
         }
         console.log(">>>>>>>>",data_to_send);
         request({
-            url: 'http://13.211.104.116:3000/api/EEvent', //URL to hit
+            url: 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.EEvent', //URL to hit
             method: 'POST',
             form: data_to_send //Set the body as a string
         }, function(error, response, body){
@@ -109,7 +109,7 @@ var createTicket = function(details,callback){
         "timestamp": details.timestamp
       }
         request({
-            url: 'http://13.211.104.116:3000/api/CreateTickets', //URL to hit
+            url: 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.CreateTickets', //URL to hit
             method: 'POST',
             form: data_to_send //Set the body as a string
         }, function(error, response, body){
@@ -132,7 +132,7 @@ var getBoughtTickets = function(details,callback){
         }
     }
     
-    var query = 'http://13.211.104.116:3000/api/Ticket'
+    var query = 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.Ticket'
     request({
         url: query ,
         qs:{filter:data_to_send}, //URL to hit
@@ -156,7 +156,7 @@ var getAvailableTickets = function(details,callback){
         }
     }
     
-    var query = 'http://13.211.104.116:3000/api/Ticket'
+    var query = 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.Ticket'
     request({
         url: query ,
         qs:{filter:data_to_send}, //URL to hit
@@ -189,7 +189,7 @@ var buyTicket = function(details,callback){
         "timestamp": "2018-05-11T10:49:49.539Z"
       }
         request({
-            url: 'http://13.211.104.116:3000/api/BuyTicket', //URL to hit
+            url: 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.BuyTicket', //URL to hit
             method: 'POST',
             form: data_to_send //Set the body as a string
         }, function(error, response, body){
@@ -212,7 +212,7 @@ var getUserBoughtTickets = function(details,callback){
         }
     }
     
-    var query = 'http://13.211.104.116:3000/api/Ticket'
+    var query = 'http://13.211.104.116:3000/api/org.deakin.ticketing.app.Ticket'
     request({
         url: query ,
         qs:{filter:data_to_send}, //URL to hit
