@@ -1,6 +1,7 @@
 /**
  * Created by Navit
  */
+//
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Config = require('../Config');

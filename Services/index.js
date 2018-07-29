@@ -1,6 +1,7 @@
 /**
  * Created by Navit.
  */
+//
 'use strict'
 module.exports = {
     UserService : require('./userService'),

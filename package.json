@@ -1,7 +1,7 @@
 {
-  "name": "BlockChain_Ticketing",
+  "name": "Trur_Ticketing",
   "version": "0.0.1",
-  "description": "BlockChain Ticketing Backend API",
+  "description": "TrueTicketing Backend API",
   "main": "server.js",
   "dependencies": {
     "apn": "^2.1.4",

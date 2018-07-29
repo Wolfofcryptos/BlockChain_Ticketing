@@ -1,6 +1,7 @@
 /**
  * Created by Navit
  */
+//
 var Models = require('../Models');
 
 var getForgetPasswordRequest = function (conditions, projection, options, callback ) {

@@ -1,7 +1,7 @@
 /**
  * Created by Navit
  */
-
+//
 'use strict';
 
 var SERVER = {
