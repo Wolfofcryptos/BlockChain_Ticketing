@@ -15,3 +15,9 @@ One done with the above steps follow these steps to run the node server on the l
 * run the command node server.js
 
 You server would be running on http://localhost:8000
+
+## Run via docker
+```
+docker-compose up
+```
+You server would be running on http://localhost:8000
