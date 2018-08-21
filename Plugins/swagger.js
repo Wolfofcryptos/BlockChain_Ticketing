@@ -8,7 +8,7 @@
 var pack = require('../package'),
     swaggerOptions = {
         apiVersion: pack.version,
-        pathPrefixSize: 2
+        pathPrefixSize: 2,
         basePath: 'http://127.0.0.1:8000',
     };
 
