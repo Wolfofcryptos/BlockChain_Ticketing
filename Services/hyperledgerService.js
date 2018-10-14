@@ -82,6 +82,7 @@ var createEvent = function(details,callback){
         "numberOfTickets": details.numberOfTickets,
         "venue": details.venue,
         "price": details.price,
+        "tickets": [],
         "time": details.time,
         "eventManager": "resource:org.deakin.ticketing.app.EventManager#"+details.eventManager
         }
